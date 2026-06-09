@@ -1,16 +1,124 @@
-# React + Vite
+# QRMenuApp
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+React ve Laravel kullanılarak geliştirilmiş QR kod tabanlı kafe menü ve sipariş sistemidir.
 
-Currently, two official plugins are available:
+## Proje Hakkında
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Bu uygulama, kafe ve restoranlarda müşterilerin masa üzerindeki QR kodu okutarak dijital menüye erişmesini ve sipariş vermesini sağlar.
 
-## React Compiler
+Müşteri tarafında ürünler kategorilere göre listelenir, ürünlere ekstra seçenekler eklenebilir ve sipariş oluşturulabilir.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Mutfak tarafında ise gelen siparişler görüntülenebilir ve sipariş durumları güncellenebilir.
 
-## Expanding the ESLint configuration
+## Kullanılan Teknolojiler
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### Frontend
+
+* React 19
+* Vite
+* Tailwind CSS
+
+### Backend
+
+* Laravel 12
+* PHP 8.2+
+* MySQL
+
+## Temel Özellikler
+
+* QR kod ile masa tanıma
+* Dijital menü görüntüleme
+* Ürün ve ekstra seçenekleri
+* Sepet ve sipariş oluşturma
+* Mutfak ekranı
+* Sipariş durum güncelleme
+* REST API mimarisi
+
+## Proje Yapısı
+
+```text
+QRMenuApp
+│
+├── src/                       # React frontend
+├── public/
+│
+├── location-waffle-backend/   # Laravel backend
+│   ├── app/
+│   ├── config/
+│   ├── database/
+│   ├── routes/
+│   └── ...
+│
+├── package.json
+└── README.md
+```
+
+## Kurulum
+
+### Backend
+
+```bash
+cd location-waffle-backend
+
+composer install
+
+copy .env.example .env
+
+php artisan key:generate
+
+php artisan migrate:fresh --seed
+
+php artisan serve
+```
+
+Backend varsayılan olarak aşağıdaki adreste çalışır:
+
+```text
+http://127.0.0.1:8000
+```
+
+### Frontend
+
+Proje ana dizininde:
+
+```bash
+npm install
+
+npm run dev
+```
+
+Frontend varsayılan olarak aşağıdaki adreste çalışır:
+
+```text
+http://localhost:5173
+```
+
+## Test URL'leri
+
+### Müşteri Ekranı
+
+```text
+http://localhost:5173/?masa=masa-01
+```
+
+### Mutfak Ekranı
+
+```text
+http://localhost:5173/kitchen
+```
+
+## API Uç Noktaları
+
+| Metot | Endpoint         | Açıklama                  |
+| ----- | ---------------- | ------------------------- |
+| GET   | /api/menu        | Menü verileri             |
+| GET   | /api/tables      | Masa bilgileri            |
+| GET   | /api/orders      | Aktif siparişler          |
+| POST  | /api/orders      | Yeni sipariş oluştur      |
+| PATCH | /api/orders/{id} | Sipariş durumunu güncelle |
+
+## Geliştirici
+
+Sedef Beysan
+
+Bilgisayar Mühendisliği Görsel Programlama Projesi
